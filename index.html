@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GM360 — Diagnóstico de planes y modelos de negocio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="script.js" defer></script>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar" id="topbar" style="display:none">
+    <div class="brand">
+      <div class="brand-mark">GM</div>
+      <div class="brand-name">GM360</div>
+    </div>
+    <nav class="topnav">
+      <button class="step-link" id="nav-diagnostico" disabled onclick="goTo('form')">Diagnóstico</button>
+      <button class="step-link" id="nav-resultados" disabled onclick="goTo('results')">Resultados</button>
+      <button class="step-link" id="nav-simulador" disabled onclick="goTo('simulator')">Escenarios</button>
+      <button class="step-link" id="nav-cotizacion" disabled onclick="goTo('cotizador')">Cotización</button>
+      <button class="step-link" id="nav-reporte" disabled onclick="goTo('report')">Reporte</button>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ===================== PORTADA ===================== -->
+    <section id="view-portada" class="view active">
+      <div class="portada-content">
+        <div class="portada-mark">GM</div>
+        <h1 class="portada-brand">GM360<span class="sub">Planes y modelos de negocio</span></h1>
+        <p class="portada-slogan">Diagnóstico que se convierte en modelo de negocio</p>
+        <button class="cta portada-cta" onclick="goTo('form')">Iniciar diagnóstico</button>
+        <button class="portada-link" onclick="goTo('home')">Conoce nuestros planes</button>
+      </div>
+    </section>
+
+    <!-- ===================== INICIO ===================== -->
+    <section id="view-home" class="view">
+      <div class="wrap">
+        <div class="hero">
+          <div class="eyebrow">Diagnóstico de modelo de negocio gratuito</div>
+          <h1>Descubre qué plan de modelo de negocio necesita tu empresa.</h1>
+          <p class="lede">Responde un cuestionario breve sobre tu negocio y recibe una evaluación de tu modelo: propuesta de valor, mercado, ingresos, operación y estrategia — con recomendaciones y el plan que más te conviene.</p>
+          <button class="cta" onclick="goTo('form')">Comenzar diagnóstico</button>
+          <button class="cta-secondary" onclick="scrollToServices()">Ver planes</button>
+          <p class="hero-note">¿No sabes qué plan necesitas? El diagnóstico te indica cuál te conviene y por qué.</p>
+        </div>
+      </div>
+      <hr class="home-divider">
+      <div class="wrap">
+        <div class="section-heading"><h3>¿Qué recibes?</h3></div>
+        <div class="why-grid" style="margin-bottom:48px">
+          <div class="why-item"><h4>Diagnóstico del modelo</h4><p>Propuesta de valor, mercado, ingresos, operación y estrategia evaluados en minutos.</p></div>
+          <div class="why-item"><h4>Posición de tu oferta</h4><p>Clasificación clara de dónde está hoy tu producto o servicio en el mercado.</p></div>
+          <div class="why-item"><h4>Plan recomendado</h4><p>Uno de los cinco planes de modelo de negocio, con niveles de inversión.</p></div>
+          <div class="why-item"><h4>Reporte digital</h4><p>Resumen listo para revisar o compartir con tu equipo o inversionistas.</p></div>
+        </div>
+      </div>
+      <hr class="home-divider">
+      <div class="wrap">
+        <div class="services-strip" id="services-strip">
+          <div class="svc"><h4>Propuesta de valor y modelo</h4><p>Define con claridad qué ofreces, a quién y cómo generas valor de forma sostenible.</p></div>
+          <div class="svc"><h4>Plan estratégico de negocio</h4><p>Ordena objetivos, mercado, operación y finanzas en un solo plan accionable.</p></div>
+          <div class="svc"><h4>Validación de modelo</h4><p>Prueba con poco riesgo si tu idea o modelo tiene demanda real antes de escalar.</p></div>
+          <div class="svc"><h4>Optimización comercial</h4><p>Ajustes de ingresos, precios y canales para vender mejor con lo que ya tienes.</p></div>
+          <div class="svc"><h4>Plan integral de modelo</h4><p>Cuando propuesta, mercado, ingresos y operación necesitan atención al mismo tiempo.</p></div>
+        </div>
+      </div>
+      <hr class="home-divider">
+      <div class="wrap">
+        <div class="section-heading"><h3>¿Por qué GM360?</h3></div>
+        <div class="why-grid">
+          <div class="why-item">
+            <h4>Diagnóstico personalizado</h4>
+            <p>Analizamos los pilares de tu modelo de negocio: valor, clientes, ingresos, operación y estrategia.</p>
+          </div>
+          <div class="why-item">
+            <h4>Soluciones integrales</h4>
+            <p>No solo detectamos problemas: proponemos alternativas concretas para ordenar o validar el modelo.</p>
+          </div>
+          <div class="why-item">
+            <h4>Información clara</h4>
+            <p>Presentamos los resultados de forma sencilla, sin tecnicismos innecesarios.</p>
+          </div>
+          <div class="why-item">
+            <h4>Enfoque en el modelo</h4>
+            <p>Convertimos el diagnóstico en un plan de negocio accionable, no solo en un número.</p>
+          </div>
+        </div>
+      </div>
+      <hr class="home-divider">
+      <div class="wrap">
+        <div class="testimonial-block">
+          <p>"Después de identificar las debilidades de nuestro modelo, pudimos definir una propuesta de valor más clara y un plan de crecimiento realista."</p>
+          <div class="t-source">— Caso demostrativo GM360</div>
+          <div class="t-tag">Ejemplo ilustrativo, no un cliente real</div>
+        </div>
+      </div>
+      <hr class="home-divider">
+      <div class="wrap">
+        <div class="section-heading"><h3>Preguntas frecuentes</h3></div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>¿Qué es un plan o modelo de negocio?</summary>
+            <p>Es la forma ordenada de explicar cómo tu empresa crea, entrega y captura valor: a quién le vendes, qué ofreces, cómo cobras y con qué recursos operas.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Se adapta si vendo productos o si ofrezco servicios?</summary>
+            <p>Sí. El diagnóstico y las recomendaciones cambian el lenguaje y el enfoque según el tipo de negocio.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué incluye cada servicio?</summary>
+            <p>Cada servicio tiene 3 niveles (Básico, Estándar y Premium) con su propio alcance, tiempo estimado y entregables. Verás el detalle completo al final de tu diagnóstico, en la sección de cotización.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cuánto tarda el proceso?</summary>
+            <p>El diagnóstico toma unos minutos. La consultoría, dependiendo del servicio y nivel elegido, puede tardar entre 1 y 12 semanas.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Para qué tipo de empresas está dirigido GM360?</summary>
+            <p>Para negocios de cualquier tamaño y giro — desde un micro-negocio que apenas empieza hasta una empresa mediana que busca ordenar, validar o escalar su modelo.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Necesito tener una empresa establecida?</summary>
+            <p>No. Si tu negocio apenas está arrancando, el diagnóstico también te sirve: puede orientarte primero a definir propuesta de valor y modelo antes de un plan más amplio.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cómo trabajamos contigo?</summary>
+            <p>De forma remota. Recibes el plan en documento y lo revisamos en sesión(es) por videollamada o llamada. Si en tu zona hay opción presencial, se acuerda al confirmar el plan.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DIAGNÓSTICO (FORM) ===================== -->
+    <section id="view-form" class="view">
+      <div class="wrap-narrow">
+        <div class="form-header">
+          <div class="step-count" id="form-step-count">Paso 1 de 3</div>
+          <h2 id="form-step-title">Datos generales de la empresa</h2>
+          <p class="sub" id="form-step-sub">Información básica para identificar el tipo de negocio.</p>
+          <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:33%"></div></div>
+        </div>
+
+        <form id="diagnostico-form" class="form-body">
+
+          <!-- Paso 1 -->
+          <div class="field-grid form-step" data-step="1">
+            <div class="field">
+              <label for="f-nombre">Nombre de la empresa</label>
+              <input type="text" id="f-nombre" placeholder="Ej. Panadería Santa Cruz" required>
+            </div>
+            <div class="field">
+              <label for="f-giro">Giro</label>
+              <select id="f-giro" required onchange="updateGiroDependentOptions()">
+                <option value="">Selecciona una opción</option>
+                <option>Comercio</option>
+                <option>Servicios</option>
+                <option>Manufactura</option>
+                <option>Tecnología</option>
+                <option>Alimentos y bebidas</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-tamano">Tamaño de empresa</label>
+              <select id="f-tamano" required>
+                <option value="">Selecciona una opción</option>
+                <option value="Micro">Micro (1-10 empleados)</option>
+                <option value="Pequeña">Pequeña (11-50 empleados)</option>
+                <option value="Mediana">Mediana (51-250 empleados)</option>
+                <option value="Grande">Grande (más de 250 empleados)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-antiguedad">Antigüedad (años)</label>
+              <input type="number" id="f-antiguedad" min="0" step="0.5" placeholder="Ej. 3" required>
+            </div>
+            <div class="field">
+              <label for="f-ubicacion">Ubicación</label>
+              <input type="text" id="f-ubicacion" placeholder="Ej. Oaxaca de Juárez, Oax." required>
+            </div>
+            <div class="field">
+              <label for="f-empleados">Número de empleados</label>
+              <input type="number" id="f-empleados" min="0" placeholder="Ej. 6" required>
+            </div>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="field-grid form-step" data-step="2" style="display:none">
+            <div class="field full">
+              <label for="f-moneda">Moneda en la que manejas tus números</label>
+              <select id="f-moneda" required>
+                <option value="MXN">Peso mexicano (MXN)</option>
+                <option value="USD">Dólar estadounidense (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+              </select>
+              <p class="hint">Los montos que captures a continuación se entienden en esta moneda.</p>
+            </div>
+            <div class="field">
+              <label for="f-ventas">Ingresos mensuales aproximados</label>
+              <input type="number" id="f-ventas" min="0" placeholder="Ej. 80000" required>
+            </div>
+            <div class="field">
+              <label for="f-marketing">Presupuesto mensual para crecimiento / captación</label>
+              <input type="number" id="f-marketing" min="0" placeholder="Ej. 2000" required>
+            </div>
+            <div class="field">
+              <label for="f-precio">Cómo defines hoy tus precios o tarifas</label>
+              <select id="f-precio" required>
+                <option value="">Selecciona una opción</option>
+                <option value="competencia">Según la competencia</option>
+                <option value="costos">Según mis costos más un margen</option>
+                <option value="valor">Según el valor que percibe el cliente</option>
+                <option value="intuicion">Más por intuición / sin método claro</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-plaza">Canal principal por el que llega el cliente</label>
+              <select id="f-plaza" required>
+                <option value="">Selecciona una opción</option>
+                <option value="fisico">Punto de venta físico</option>
+                <option value="digital">Sitio web / tienda en línea</option>
+                <option value="redes">Redes sociales</option>
+                <option value="referidos">Referidos / boca a boca</option>
+                <option value="mixto">Varios canales a la vez</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-competencia">Nivel de competencia percibido</label>
+              <select id="f-competencia" required>
+                <option value="">Selecciona una opción</option>
+                <option>Baja</option>
+                <option>Media</option>
+                <option>Alta</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="field-grid form-step" data-step="3" style="display:none">
+            <div class="field full">
+              <label for="f-problema">Principal reto del modelo de negocio</label>
+              <select id="f-problema" required onchange="updateObjetivoOptions()">
+                <option value="">Selecciona una opción</option>
+                <option value="ventas_bajas">Pocos clientes o poca demanda</option>
+                <option value="diferenciacion">Mi oferta no se diferencia</option>
+                <option value="precio">No sé si mi precio / modelo de ingresos es el adecuado</option>
+                <option value="marketing">Falta de estrategia de crecimiento</option>
+                <option value="competencia">Competencia muy fuerte</option>
+                <option value="canales">Me cuesta llegar a nuevos clientes</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="f-objetivo">Objetivo principal del plan de negocio</label>
+              <select id="f-objetivo" required>
+                <option value="">Selecciona primero el problema principal</option>
+              </select>
+              <p class="hint">Las opciones cambian según el problema y el tipo de negocio (producto o servicio).</p>
+            </div>
+            <div class="field">
+              <label for="f-trato">¿Cómo es el trato con tus clientes hoy?</label>
+              <select id="f-trato" required>
+                <option value="">Selecciona una opción</option>
+                <option value="cercano">Muy cercano y constante</option>
+                <option value="personal">Personal, pero irregular</option>
+                <option value="transaccional">Solo transaccional (compra y listo)</option>
+                <option value="sin_seguimiento">Casi no hay seguimiento</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-recomendable">¿Qué tan recomendable crees que es tu oferta?</label>
+              <select id="f-recomendable" required>
+                <option value="">Selecciona una opción</option>
+                <option value="muy">Muy recomendable</option>
+                <option value="si">Recomendable</option>
+                <option value="regular">Regular</option>
+                <option value="poco">Poco recomendable</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="f-refieren">¿Has notado que tus clientes te recomiendan?</label>
+              <select id="f-refieren" required>
+                <option value="">Selecciona una opción</option>
+                <option value="frecuente">Sí, con frecuencia</option>
+                <option value="a_veces">A veces</option>
+                <option value="casi_nunca">Casi nunca</option>
+                <option value="no_se">No lo sé / no lo mido</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-intencion">¿Quieres empezar un plan con acompañamiento?</label>
+              <select id="f-intencion" required>
+                <option value="">Selecciona una opción</option>
+                <option value="si_pronto">Sí, en las próximas semanas</option>
+                <option value="explorando">Estoy explorando opciones</option>
+                <option value="solo_diagnostico">Solo quiero el diagnóstico por ahora</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-nuevo">¿Tu negocio es nuevo (menos de 1 año operando)?</label>
+              <select id="f-nuevo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="si">Sí, estoy arrancando</option>
+                <option value="no">No, ya opero con trayectoria</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="f-notas">Cuéntanos más sobre tu negocio <span class="hint">(opcional)</span></label>
+              <textarea id="f-notas" placeholder="Contexto adicional que quieras compartir..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-plain" id="btn-back" onclick="prevStep()" style="visibility:hidden">Atrás</button>
+            <button type="button" class="btn-primary" id="btn-next" onclick="nextStep()">Continuar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===================== LOADING ===================== -->
+    <section id="view-loading" class="view">
+      <div class="loading-screen">
+        <div class="loading-ring"></div>
+        <p id="loading-text">Analizando la información de tu negocio…</p>
+      </div>
+    </section>
+
+    <!-- ===================== RESULTADOS ===================== -->
+    <section id="view-results" class="view">
+      <div class="wrap">
+        <div class="results-header">
+          <div class="step-count">Diagnóstico</div>
+          <h2>Resultados de tu diagnóstico de modelo de negocio</h2>
+          <p class="company-line" id="results-company-line"></p>
+          <p style="margin-top:6px;font-size:13px;color:var(--slate);">Puntuaciones y recomendaciones <strong>orientativas e hipotéticas</strong> — punto de partida, no decisión final.</p>
+        </div>
+
+        <div class="score-panel">
+          <div class="overall-score">
+            <div class="num" id="overall-num">0<span>/100</span></div>
+            <p class="label">Puntuación general del modelo de negocio</p>
+            <div class="semaforo-pill" id="overall-pill"><span class="dot"></span><span id="overall-pill-text">—</span></div>
+          </div>
+          <div class="meter-list" id="meter-list"></div>
+        </div>
+
+        <div class="insight-cols">
+          <div class="insight-col">
+            <div class="eyebrow-sm">Área prioritaria</div>
+            <h3 id="opportunity-area">—</h3>
+            <p id="opportunity-text">—</p>
+          </div>
+          <div class="insight-col">
+            <div class="eyebrow-sm">Recomendaciones</div>
+            <ul class="rec-list" id="rec-list"></ul>
+          </div>
+        </div>
+
+        <div class="bcg-block" id="results-bcg" style="margin:8px 0 28px;">
+          <div class="eyebrow-sm" style="margin-bottom:10px; color:var(--bronze-dark); font-size:12.5px; font-weight:600;">Posición de tu oferta</div>
+          <div class="bcg-label" id="results-bcg-label">—</div>
+          <p class="bcg-desc" id="results-bcg-desc">—</p>
+          <p class="bcg-mvp" id="results-bcg-mvp" style="display:none"></p>
+        </div>
+
+        <div style="margin:28px 0 8px;">
+          <div class="eyebrow-sm" style="margin-bottom:10px; color:var(--bronze-dark); font-size:12.5px; font-weight:600;">Modelo de negocio (canvas orientativo)</div>
+          <p style="font-size:13px; color:var(--slate); margin-bottom:12px;">Generado a partir de tus respuestas. Es un borrador para conversar, no un documento final.</p>
+          <div class="canvas-grid" id="results-canvas-grid"></div>
+        </div>
+      </div>
+
+      <div class="wrap service-block">
+        <div class="eyebrow">Plan recomendado</div>
+        <div class="service-highlight">
+          <div>
+            <h3 id="service-name">—</h3>
+            <p id="service-desc">—</p>
+          </div>
+          <button class="go" onclick="goTo('cotizador')">Ver planes y precios →</button>
+        </div>
+        <div class="other-services" id="other-services"></div>
+      </div>
+    </section>
+
+
+    <!-- ===================== SIMULADOR ===================== -->
+    <section id="view-simulator" class="view">
+      <div class="wrap">
+        <div class="sim-header">
+          <div class="step-count">Escenarios de modelo de negocio</div>
+          <h2>¿Qué pasaría si refuerzas una palanca?</h2>
+          <p class="sub" style="margin-top:10px; color:var(--slate); font-size:15px;">Elige un foco y mira el impacto estimado sobre tu diagnóstico. Es orientativo, no una predicción.</p>
+        </div>
+
+        <div class="sim-body">
+          <div class="sim-controls">
+            <div class="sim-field">
+              <label>Palanca a reforzar</label>
+              <select id="sim-palanca" onchange="renderSimulator()" style="width:100%; margin-top:8px; border:1px solid var(--line); padding:10px 12px; border-radius:2px; font-size:14px; background:var(--white); color:var(--ink);">
+                <option value="promocion">Fortalecer crecimiento y captación</option>
+                <option value="precio">Ajustar modelo de ingresos / precios</option>
+                <option value="plaza">Mejorar canales de acceso al cliente</option>
+                <option value="producto">Clarificar propuesta de valor</option>
+                <option value="cliente">Definir mejor el mercado objetivo</option>
+              </select>
+            </div>
+            <div class="sim-field">
+              <label>Intensidad del esfuerzo <span class="val" id="val-intensidad">Media</span></label>
+              <input type="range" id="sim-intensidad" min="1" max="3" step="1" value="2" oninput="renderSimulator()">
+              <p style="margin-top:8px; font-size:12px; color:var(--slate);">Baja · Media · Alta</p>
+            </div>
+          </div>
+
+          <div class="sim-results">
+            <h3>Impacto estimado</h3>
+            <div class="sim-stat"><span class="s-label">Área más beneficiada</span><span class="s-value" id="sim-out-area">—</span></div>
+            <div class="sim-stat"><span class="s-label">Puntuación proyectada</span><span class="s-value up" id="sim-out-score">—</span></div>
+            <div class="sim-stat"><span class="s-label">Cambio vs. hoy</span><span class="s-value up" id="sim-out-delta">—</span></div>
+            <div class="sim-stat"><span class="s-label">Efecto esperado</span><span class="s-value" id="sim-out-efecto" style="font-size:15px; font-family:var(--sans); font-weight:500;">—</span></div>
+            <p class="sim-note">Estas proyecciones son <strong>aproximadas e hipotéticas</strong>: orientan la conversación, no predicen resultados reales. El plan recomendado traduce el diagnóstico en acciones concretas de modelo de negocio.</p>
+          </div>
+        </div>
+
+        <div class="service-highlight" style="margin-top:12px;">
+          <div>
+            <h3>Siguiente paso</h3>
+            <p>Revisa los niveles del plan recomendado y elige el alcance que te convenga.</p>
+          </div>
+          <button class="go" onclick="goTo('cotizador')">Ver cotización →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COTIZACIÓN ===================== -->
+    <section id="view-cotizador" class="view">
+      <div class="wrap">
+        <div class="results-header">
+          <div class="step-count">Cotización</div>
+          <h2 id="cotizador-title">Opciones para tu plan recomendado</h2>
+          <p class="company-line" id="cotizador-company-line"></p>
+        </div>
+
+        <div class="tier-grid" id="tier-grid"></div>
+
+        <p class="sim-note">Los precios se muestran en la moneda que indicaste al inicio del diagnóstico (lista local, no conversión automática). Los montos y tiempos son estimados de referencia para esta demostración; la cotización final la confirma un consultor de GM360 según el alcance real del proyecto.</p>
+
+        <div class="form-actions" style="border-top:1px solid var(--line); padding-top:32px;">
+          <button type="button" class="btn-plain" onclick="goTo('simulator')">← Volver al simulador</button>
+          <button type="button" class="btn-primary" onclick="goTo('report')">Ver reporte final →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REPORTE ===================== -->
+    <section id="view-report" class="view">
+      <div class="wrap">
+        <div class="report-header">
+          <div class="step-count">Reporte final</div>
+          <h2>Reporte de diagnóstico de modelo de negocio</h2>
+        </div>
+
+        <div class="report-doc" id="report-doc">
+          <div class="report-top">
+            <div class="r-brand">GM360 · Modelos de negocio</div>
+            <div class="r-meta">
+              <div id="report-date"></div>
+              <div>Reporte de diagnóstico</div>
+            </div>
+          </div>
+
+          <div class="report-title">
+            <h2 id="report-company-name">—</h2>
+            <p id="report-company-sub">—</p>
+          </div>
+
+          <div class="report-grid" id="report-grid"></div>
+
+          <div class="report-section">
+            <h4>Puntuaciones por área</h4>
+            <div class="report-scores" id="report-scores"></div>
+          </div>
+
+          <div class="report-section">
+            <h4>Posición de tu oferta</h4>
+            <div class="bcg-block" id="bcg-block">
+              <div class="bcg-label" id="bcg-label">—</div>
+              <p class="bcg-desc" id="bcg-desc">—</p>
+              <p class="bcg-mvp" id="bcg-mvp" style="display:none"></p>
+            </div>
+          </div>
+
+          <div class="report-service">
+            <h4>Plan recomendado</h4>
+            <div class="svc-name" id="report-service-name">—</div>
+            <p id="report-service-desc">—</p>
+          </div>
+        </div>
+
+        <div class="report-cta">
+          <p>¿Quieres que revisemos este diagnóstico contigo y armemos tu plan de modelo de negocio?</p>
+          <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+            <button class="restart-link" onclick="restartApp()">Reiniciar diagnóstico</button>
+            <button class="restart-link" onclick="window.print()">Descargar reporte en PDF</button>
+            <button class="btn-request" onclick="openModal()">Solicitar este plan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    GM360 · Planes y modelos de negocio — Diagnóstico y planes basados en el modelo de negocio. Resultados orientativos.
+    <span class="footer-links">
+      <button class="footer-link" onclick="openLegalModal()">Aviso de privacidad · Términos y condiciones</button>
+      <span style="margin:0 6px; opacity:0.4;">·</span>
+      <button class="footer-link" onclick="openAdminModal()">Panel interno</button>
+    </span>
+  </footer>
+</div>
+
+<!-- Modal solicitud: el cliente envía desde su propio correo (mailto).
+     Además se guarda la solicitud en el navegador para el panel de administración. -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box" style="max-width:480px;">
+    <div id="modal-form-wrap">
+      <h3 style="margin-bottom:8px;">Solicitar plan</h3>
+      <p style="font-size:13.5px; color:var(--slate); margin-bottom:6px;">Empresa: <strong id="modal-company">—</strong><span id="modal-plan-wrap" style="display:none;"> · <strong id="modal-plan"></strong></span></p>
+      <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px; line-height:1.45;">
+        Completa tus datos y envía el mensaje desde <strong>tu propio correo</strong>.
+        Se abrirá tu aplicación de correo con el mensaje listo; solo tienes que enviarlo.
+        La solicitud también queda registrada en esta página para que GM360 la revise.
+      </p>
+      <form id="request-form" onsubmit="return submitClientRequest(event)">
+        <div class="field" style="margin-bottom:12px;">
+          <label for="r-nombre">Tu nombre</label>
+          <input type="text" id="r-nombre" name="Nombre" required placeholder="Nombre completo" style="width:100%; border:1px solid var(--line); padding:10px 12px; border-radius:2px;">
+        </div>
+        <div class="field" style="margin-bottom:12px;">
+          <label for="r-email">Tu correo (para responderte)</label>
+          <input type="email" id="r-email" name="Correo" required placeholder="tunombre@correo.com" style="width:100%; border:1px solid var(--line); padding:10px 12px; border-radius:2px;">
+        </div>
+        <div class="field" style="margin-bottom:12px;">
+          <label for="r-telefono">Tu teléfono <span class="hint">(opcional)</span></label>
+          <input type="tel" id="r-telefono" name="Teléfono" placeholder="Ej. 951 123 4567" style="width:100%; border:1px solid var(--line); padding:10px 12px; border-radius:2px;">
+          <p class="hint" style="margin-top:4px; font-size:12px; color:var(--slate);">Incluye lada, si nos lo dejas.</p>
+        </div>
+        <div class="field" style="margin-bottom:16px;">
+          <label for="r-mensaje">Nota <span class="hint">(opcional)</span></label>
+          <textarea id="r-mensaje" name="Nota" rows="2" placeholder="Opcional" style="width:100%; border:1px solid var(--line); padding:10px 12px; border-radius:2px;"></textarea>
+        </div>
+        <button type="submit" class="btn-request" id="btn-send-request" style="width:100%;">Abrir mi correo y enviar</button>
+        <button type="button" class="btn-plain" onclick="closeModal()" style="width:100%; margin-top:8px;">Cancelar</button>
+      </form>
+    </div>
+    <div id="modal-success-wrap" style="display:none;">
+      <div class="m-icon">✓</div>
+      <h3>Listo para enviar</h3>
+      <p>Se abrió tu correo con el mensaje prellenado para <strong id="modal-company-ok">tu empresa</strong>. Envíaselo a GM360 desde tu bandeja. La solicitud también quedó guardada en el panel de esta página.</p>
+      <button class="modal-close" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="legal-modal">
+  <div class="modal-box" style="text-align:left; max-width:520px;">
+    <h3 style="margin-bottom:14px;">Aviso de privacidad y términos</h3>
+    <p style="font-size:13.5px; color:var(--ink-soft); line-height:1.6; margin-bottom:12px;">
+      Los datos que proporcionas en este diagnóstico (información de tu empresa y de contacto) se utilizan
+      exclusivamente para generar tu evaluación y, en caso de que lo solicites, para que un consultor de
+      GM360 se ponga en contacto contigo. No se comparten con terceros ni se usan con fines distintos.
+    </p>
+    <p style="font-size:13.5px; color:var(--ink-soft); line-height:1.6;">
+      Esta plataforma es una demostración: las puntuaciones y recomendaciones se generan con reglas de
+      negocio, no con inteligencia artificial ni con asesoría financiera o legal certificada. Úsala como
+      punto de partida para una conversación con un consultor, no como una decisión final.
+    </p>
+    <button class="modal-close" onclick="closeLegalModal()" style="margin-top:18px;">Cerrar</button>
+  </div>
+</div>
+
+<!-- Panel de administración: datos almacenados en Supabase -->
+<div class="modal-overlay" id="admin-modal">
+  <div class="modal-box" style="text-align:left; max-width:720px; max-height:90vh; overflow:auto;">
+    <div id="admin-login-wrap">
+      <h3 style="margin-bottom:10px;">Panel administrativo</h3>
+      <p style="font-size:13.5px; color:var(--slate); margin-bottom:14px; line-height:1.5;">
+        Inicia sesión con el usuario administrador creado en Supabase para consultar los diagnósticos y solicitudes.
+      </p>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="admin-email">Correo administrador</label>
+        <input type="email" id="admin-email" placeholder="admin@ejemplo.com" autocomplete="username" style="width:100%; border:1px solid var(--line); padding:10px 12px; border-radius:2px;">
+      </div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="admin-pass">Contraseña</label>
+        <input type="password" id="admin-pass" placeholder="Contraseña de Supabase" autocomplete="current-password" style="width:100%; border:1px solid var(--line); padding:10px 12px; border-radius:2px;">
+      </div>
+      <button type="button" class="btn-request" onclick="adminLogin()" style="width:100%;">Entrar</button>
+      <button type="button" class="btn-plain" onclick="closeAdminModal()" style="width:100%; margin-top:8px;">Cerrar</button>
+    </div>
+    <div id="admin-list-wrap" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px;">
+        <h3 style="margin:0;">Registros de clientes</h3>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-plain" onclick="loadAdminData()" style="border:1px solid var(--line); padding:8px 12px;">Actualizar</button>
+          <button type="button" class="btn-plain" onclick="adminLogout()" style="border:1px solid var(--line); padding:8px 12px;">Cerrar sesión</button>
+          <button type="button" class="btn-plain" onclick="closeAdminModal()" style="border:1px solid var(--line); padding:8px 12px;">Cerrar</button>
+        </div>
+      </div>
+      <p id="admin-empty" style="font-size:14px; color:var(--slate); display:none;">Aún no hay registros en Supabase.</p>
+      <div id="admin-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
